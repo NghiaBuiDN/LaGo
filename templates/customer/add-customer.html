@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container">
+  <div
+    class="mb-3"
+    style="
+      font-size: 15px;
+      text-align: center;
+
+      margin-top: 30px;
+    "
+  >
+    <h1 style="font-size: 20px">THÊM THÔNG TIN</h1>
+  </div>
+  <form action="{% url 'add_new_customer' %}" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Họ tên</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Nhập họ và tên"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Số điện thoại</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        name="phone"
+        placeholder="Nhập số điện thoại"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Địa chỉ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        name="address"
+        placeholder="Nhập số địa chỉ"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Thành phố</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        name="city"
+        placeholder="Nhập thành phố"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Tỉnh</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        name="state"
+        placeholder="Nhập tỉnh"
+      />
+    </div>
+
+    <div class="mb-3" style="text-align: center">
+      <button type="submit" class="btn btn-primary">Thêm</button>
+      <button type="button" class="btn btn-warning">Làm lại</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

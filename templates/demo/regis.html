@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block content %}
+<section class="py-4 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">User Name</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+<script> 
+$(document).ready(function () {
+    $("#regis").on("click", function () {
+      let pass = $("#exampleInputPassword1").val();
+      if(pass.length < 10){
+        $(".err-pass").html("Loi password qua ngan");
+      }else{
+        $(".err-pass").html("");
+      }
+    });
+  });
+  </script>
+
+
+{% endblock %}

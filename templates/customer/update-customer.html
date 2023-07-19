@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container">
+    <div
+      class="mb-3"
+      style="
+        font-size: 15px;
+        text-align: center;
+  
+        margin-top: 30px;
+      "
+    >
+      <h1 style="font-size: 20px">CẬP NHẬT THÔNG TIN</h1>
+    </div>
+    <form  action="{% url 'update_process' %}" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="hidden" id="customer_id" name="customer_id" value="{{customer.id}}">
+        <label for="exampleFormControlInput1" class="form-label">Họ tên</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          value="{{customer.name}}"
+          placeholder="Nhập họ và tên"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Số điện thoại</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          name="phone"
+          value="{{customer.phone}}"
+          placeholder="Nhập số điện thoại"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Địa chỉ</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          name="address"
+          value="{{customer.address}}"
+          placeholder="Nhập số địa chỉ"
+        />
+      </div>
+  
+      <div class="mb-3" style="text-align: center">
+        <button type="submit" class="btn btn-primary">Cập Nhật</button>
+        <button type="button" class="btn btn-warning">Làm lại</button>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block content %}
+
+<!-- Introduction section -->
+
+<div class="container">
+    <div class="row">
+        {% for product in page_obj %}
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem; align-items: center;">
+                <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.title }}</h5>
+                  <p class="card-text">{{ product.description }}</p>
+                  <a href="{{product.get_absolute_url}}" class="btn btn-primary">{{product.price}}</a>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

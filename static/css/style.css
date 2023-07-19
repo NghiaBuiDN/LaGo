@@ -1,0 +1,11 @@
+.container{
+    background-color: rgb(170, 235, 161);
+    
+}
+row{
+    display: flex;
+}
+col{
+    /* width: 90%; */
+    height: auto;
+}

@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+{% if form.errors %}
+
+<p>There was an error with your form...</p>
+
+{% endif %}
+
+
+
+<div class="container">
+  <div
+    class="mb-3"
+    style="
+      font-size: 30px;
+      text-align: left;
+
+      margin-top: 30px;
+    "
+  >Register
+  </div>
+  <form action="{% url 'register' %}" method=POST>
+    {% csrf_token %}
+
+    {{form}}
+    <!-- Email input -->
+    <br>
+    
+  
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+  </form>
+</div>
+
+{% endblock %}
