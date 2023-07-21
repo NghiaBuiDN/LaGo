@@ -51,7 +51,6 @@ class Cart():
     def get_total(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
     
-    def get_product(self,product_id):
-        products = Product.objects.filter(id__in=all_product_ids)
+
     
 

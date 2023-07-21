@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from customer import views
+from .views import export_customer_csv
 
 urlpatterns = [
     path('addcus',views.add_customer, name = "addcus"),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('search_customer/',views.search_customer, name = "search_customer"),
     path('get_customer/',views.getCustomer, name = "get_customer"),
     path('post/',views.postCustomer, name = "postCustomer"),
+    path('export', export_customer_csv, name='export_customer_csv'),
 ]

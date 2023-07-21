@@ -46,3 +46,6 @@ def cart_update(request):
 def checkout(request):
     return render(request, 'customer/add-customer.html')
 
+def payment(request):
+    cart = Cart(request)
+    return render(request, 'cart/payment.html',{'cart':cart})

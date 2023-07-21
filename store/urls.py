@@ -7,5 +7,5 @@ urlpatterns = [
     path('product/<slug:product_slug>/',views.product_info,name="product-info"),
     path('search_product',views.search_product,name="search_product"),
     path('bathbomb',views.bathbomb,name="bathbomb"),
-
+    
 ]

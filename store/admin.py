@@ -14,4 +14,8 @@ class ProductAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'customer' , 'date_ordered', 'product', 'quantity','total_order','complete']
 
-admin.site.register(Customer)
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name' , 'phone', 'address', 'city','state','date_added']
+

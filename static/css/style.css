@@ -9,3 +9,7 @@ col{
     /* width: 90%; */
     height: auto;
 }
+
+.row-image{
+	width: 100px;
+}

@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializer import CustomerSerializer
 from decimal import Decimal
+import csv
 # Create your views here.
 
 
@@ -39,13 +40,11 @@ def add_new_customer(request):
                         city = rq_city , state = rq_state)
         data.save()
         
-        for product_id in cart:
-            product = Product.objects.filter(id = product_id)
-            # rq_product_name = cart.item_title()
-            # rq_quantity = cart.__len__()
-            # rq_total_order = cart.get_total()
+        for item in cart:
+            product = item['product']
             data_order = Order(customer=data, product = product,
-                                quantity = cart[product_id]["qty"], total_order = 0)
+                                quantity = item['qty'], total_order = int(item['qty'])*int(item['price'])
+                                )
             data_order.save()
 
     customer_list = Customer.objects.all()
@@ -96,6 +95,19 @@ def search_customer(request):
     else:
         return render(request,"customer/list-customer.html")
     
+
+def export_customer_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="customer.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['id','name', 'phone', 'address'])
+
+    users = Customer.objects.all().values_list('id','name', 'phone', 'address')
+    for user in users:
+        writer.writerow(user)
+
+    return response
 
     
 @api_view(['GET'])

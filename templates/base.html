@@ -40,7 +40,7 @@
     <script src="{%static 'js/valid.js'%}"></script>
   </head>
 
-  <nav class="navbar navbar-expand-lg bg-primary justify-content-center">
+  <nav class="navbar fixed-top navbar-expand-lg bg-primary justify-content-center">
     <a class="navbar-brand main-heading text-white" href="{% url 'store' %}">
       &nbsp; &nbsp; Lá Gỗ Home
     </a>
@@ -115,7 +115,7 @@
             Xin chào {{user.username}}
             <br>
             Logout
-          </a>
+          </br>
         </li>
         {% else %}
         <li class="nav-item">
@@ -188,5 +188,5 @@
       </div>
   </div>
 <!-- copyright section end -->
-  </body>
+  </div>
 </html>
