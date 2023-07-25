@@ -7,6 +7,11 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+.navbar-collapse{
+    padding-left: 40px;
+    font-size: 16px;
+}
+
 a {
     color: #1f1f1f;
     text-decoration: none !important;
@@ -210,10 +215,12 @@ form{
 .btn_main {
     width: 100%;
     display: flex;
+    text-align: center;
 }
 
 .buy_bt {
-    float: left;
+    /* float: left; */
+    text-align: center;
     width: 100%;
 }
 
@@ -234,7 +241,7 @@ form{
 .seemore_bt {
     width: 100%;
     float: right;
-    text-align: right;
+    text-align: center;
 }
 
 .seemore_bt a {
@@ -423,7 +430,7 @@ input.mail_bt::placeholder {
 /* banner section */
 
 .buynow_bt {
-    width: 798px;
+    width: 60%;
     margin: 0 auto;
     padding-top: 30px;
 }
@@ -431,7 +438,7 @@ input.mail_bt::placeholder {
 .buynow_bt a {
     width: 100%;
     float: left;
-    font-size: 24px;
+    font-size: 20px;
     color: #ffffff;
     background-color: #252525;
     text-align: center;
@@ -444,4 +451,42 @@ input.mail_bt::placeholder {
 .buynow_bt a:hover {
     background-color: #f26522;
     color: #ffffff;
+}
+
+
+/* cart */
+
+
+icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.icon-sm {
+    width: 2rem;
+    height: 2rem;
+    
+}
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+	
+
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
 }

@@ -16,7 +16,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="{%static 'css/style_login.css'%}" />
     <link rel="stylesheet" href="{%static 'css/style.css'%}" />
     
 
@@ -27,6 +26,8 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+
+
     <!-- JavaScript Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -37,63 +38,41 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <script src="{%static 'js/valid.js'%}"></script>
   </head>
 
-  <nav class="navbar fixed-top navbar-expand-lg bg-primary justify-content-center">
-    <a class="navbar-brand main-heading text-white" href="{% url 'store' %}">
+  <nav class="navbar sticky-top navbar-expand-lg bg-primary justify-content-center bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand main-heading text-dark" href="{% url 'store' %}">
       &nbsp; &nbsp; Lá Gỗ Home
     </a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-white"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Categories
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="{% url 'bathbomb' %}"> Bathbomb </a>
-            </li>
-          </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'store' %}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-white"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sản phẩm
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'bathbomb' %}">Bathbomb</a>
+            <a class="dropdown-item" href="#">Muối tắm</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Dầu gội</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Contact us
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="https://www.facebook.com/lago.bathhome" target="_blank"> Facebook </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="https://www.instagram.com/lago.bathhome/" target="_blank"> Instagram </a>
-            </li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.facebook.com/lago.bathhome" target="_blank">Facebook</a>
+            <a class="dropdown-item" href="https://www.instagram.com/lago.bathhome/" target="_blank">Instagram</a>
+          </div>
         </li>
       </ul>
     </div>
@@ -105,64 +84,32 @@
         Search
       </button>
     </form>
- 
-    <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto">
-        
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'process_logout' %}">
-            Xin chào {{user.username}}
-            <br>
-            Logout
-          </br>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'register' %}">
-            Register
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'login' %}">
-            Login
-          </a>
-        </li>
-        {% endif %}
-        &nbsp; &nbsp; &nbsp;
-
-        <li class="nav-item">
-          
-        </li>
-
-        &nbsp; &nbsp; &nbsp;
-      </ul>
-    </div>
     <div class="cart">
-        <a
-            type="button"
-            role="button"
-            href="{% url 'cart-summary' %}"
-            class="btn btn-outline-secondary"
-          >
-            <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+      <a
+          type="button"
+          role="button"
+          href="{% url 'cart-summary' %}"
+          class="btn btn-outline-secondary"
+        >
+          <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
 
-            <div id="cart-qty" class="d-inline-flex">
-              {% with qty_amount=cart|length %}          
-                  {% if qty_amount > 0 %}
-                        {{ qty_amount }}
-                      {% else %}
-                          0
-                  {% endif %}
-              {% endwith %}
-          </div>
-          </a>
-      </div>
+          <div id="cart-qty" class="d-inline-flex">
+            {% with qty_amount=cart|length %}          
+                {% if qty_amount > 0 %}
+                      {{ qty_amount }}
+                    {% else %}
+                        0
+                {% endif %}
+            {% endwith %}
+        </div>
+        </a>
+    </div>
+
   </nav>
   
   <body>
     {% block content %} {% endblock %}
-
+  </body>
 <!-- footer section start -->
     <div class="footer_section layout_padding">
       <div class="container">
@@ -178,15 +125,16 @@
           </ul>
       </div>
       <div class="location_main">Help Line  Number : <a href="#">+84 839 330 199</a></div>
+      <div class="copyright_section">
+        <div class="container">
+        <p class="copyright_text">© 2022 Copyright by Kaylin</p>
+        </div>
+      </div>
       </div>
   </div>
 <!-- footer section end -->
 <!-- copyright section start -->
-  <div class="copyright_section">
-      <div class="container">
-      <p class="copyright_text">© 2022 Copyright by Kaylin</p>
-      </div>
-  </div>
+  
 <!-- copyright section end -->
-  </div>
+
 </html>

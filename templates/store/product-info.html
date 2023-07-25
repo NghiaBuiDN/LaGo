@@ -25,7 +25,7 @@
         <div class="border">
           <div class="col border-bottom">
             <div class="row p-3">
-              <div class="col-6">Price</div>
+              <div class="col-6">Giá</div>
 
               <div class="col-6 text-end">
                 <span class="h4 fw-bold">VND {{ product.price|floatformat:3 }} </span>
@@ -36,7 +36,7 @@
           <div class="col">
             <div class="row p-3">
               <div class="col-6">
-                <label for="select">Qty</label>
+                <label for="select">Số lượng</label>
 
                 &nbsp;
 
@@ -51,16 +51,28 @@
                 </select>
               </div>
 
-              <div class="col-6 text-end">
+              <div class="col-6 text-end" style="display: block;">
                 <button
                   type="button"
                   id="add-button"
                   value="{{product.id}}"
                   class="btn btn-secondary btn-sm"
                 >
-                  <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add to
-                  cart
+                  <i class="fa fa-plus" aria-hidden="true" style="font-size: 1rem;"> Thêm vào giỏ</i>
                 </button>
+                <div class="btn" >
+                  <div class="cart">
+                    <a
+                        type="button"
+                        role="button"
+                        href="{% url 'cart-summary' %}"
+                        class="btn btn-outline-secondary"
+                        style="font-size: 1rem;"
+                      > Giỏ
+                        <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                      </a>
+                  </div>
+                </div>  
               </div>
             </div>
           </div>

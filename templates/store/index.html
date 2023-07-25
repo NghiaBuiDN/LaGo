@@ -39,24 +39,6 @@
 </section>
 
 
-
-
-
-
-
-<!-- <section class="py-4 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h4>ĐÂY LÀ NỘI DUNG STORE</h4>
-      <br />
-      <p class="lead text-muted">Browse our extensive collection.</p>
-      <br />
-      <a href="#" class="btn btn-primary my-2"> Create an account </a>
-    </div>
-  </div>
-</section> -->
-
-
 <!-- product section start -->
 <br>
 <div class="product_section">
@@ -73,17 +55,25 @@
                        <div class="box_main">
                           <h4 class="product_text">{{ product.title }}</h4>
                           <p class="price_text">Price:  <span style="color: #262626;">VND {{product.price|floatformat:3}}</span></p>
-                          <div class="product_img"><img src="{{ product.image.url }}"></div>
+                          <div class="product_img">
+                            <a href="{{ product.get_absolute_url }}" >
+                              <img src="{{ product.image.url }}" href="{{ product.get_absolute_url }}">
+                            </a>
+                          </div>
                           <div class="btn_main">
                             <div class="buy_bt">
                               <button 
                                 type="button"
                                 id="add-button"
-                                value="{{product.id}}" 
-                                class="btn btn-outline-secondary add-btn update-cart">Add to Cart
+                                value="{{product.id}}"
+                                data-index="{{product.id}}" 
+                                class="btn btn-outline-secondary add-btn update-cart">Thêm vào giỏ
                               </button>
+                            </div> 
+                            <div class="buy_bt">
+                              <div class="btn btn-outline-secondary add-btn update-cart"><a href="{{ product.get_absolute_url }}">Chi tiết</a></div>
                             </div>
-                            <div class="seemore_bt"><a href="{{ product.get_absolute_url }}">See More</a></div>
+                            
                           </div>
                        </div>
                    </div>
@@ -131,9 +121,7 @@
 
   $(document).on("click", "#add-button", function (e) {
     qua = 1;
-
     e.preventDefault();
-
     $.ajax({
       type: "POST",
       url: '{% url "cart-add" %}',
@@ -143,13 +131,10 @@
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },
-
       success: function (json) {
         //console.log(json)
-
         document.getElementById("cart-qty").textContent = json.qty;
       },
-
       error: function (xhr, errmsg, err) {},
     });
   });

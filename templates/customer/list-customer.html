@@ -45,7 +45,8 @@
       <td>{{customer.phone}}</td>
       <td>{{customer.address}}</td>
       <td>
-        <a href="{%url 'update_customer' customer.id %}">Sửa</a>|<a
+        <a href="{%url 'update_customer' customer.id %}">Sửa</a>|
+          <a
           onclick="del_customer('{{customer.id}}')"
           href="#"
           >Xóa</a
