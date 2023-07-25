@@ -1,79 +1,41 @@
-{% extends "base.html" %} 
-{% load static %}
-{% block content %}
-
-
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <div class="container">
-    <div class="mb-3" style="
-    font-size: 15px;
-    text-align: center;
-  
-    margin-top: 30px;
-">
-       <h1 style="
-       font-size: 20px;
-   ">ĐÂY LÀ TRANG PAYMENT</h1>
-  
+  <div class="row">
+    <div class="col-lg-6">
+      <div
+      class="mb-3"
+      style="
+        font-size: 15px;
+        text-align: left;
     
+        margin-top: 30px;
+      "
+    >
 
-  <form class="d-flex" action="{% url 'search_customer' %}" method=POST>
-    {% csrf_token %}
-    <input class="form-control me-2" placeholder="Search" aria-label="Search" type="search" name="searched" >
-    <button class="btn btn-outline-success" type="submit">
-      Search
-    </button>
-  </form>
-
-</div>
-   
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Họ tên</th>
-      <th scope="col">Số điện thoại</th>
-      <th scope="col">Địa chỉ</th>
-      <th scope="col">Hành động</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for customer in page_obj%}
-    <tr>
-      <th scope="row">{{customer.id}}</th>
-      <td>{{customer.name}}</td>
-      <td>{{customer.phone}}</td>
-      <td>{{customer.address}}</td>
-      <td>
-        <a href="{%url 'update_customer' customer.id %}">Sửa</a>|<a
-          onclick="del_customer('{{customer.id}}')"
-          href="#"
-          >Xóa</a
-        >
-      </td>
-    </tr>
-    {% endfor %}
+      <h1 style="font-size: 20px"><br>CÁM ƠN BẠN ĐÃ ĐẶT HÀNG</h1>
+      </div>
+      
+    </div>
     
+    <div class="col-lg-6">
+      <div class="box-element">
+        <br>
+        <h3>Order Summary</h3>
+        <hr>
+        {% for item in cart %}
+        <div class="cart-row">
+          <div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
+          <div style="flex:2"><p>{{item.product.name}}</p></div>
+          <div style="flex:1"><p>VND {{item.product.price|floatformat:3}}</p></div>
+          <div style="flex:1"><p>x{{item.qty}}</p></div>
+        </div>
+        {% endfor %}
+        <h5>Items:   </h5>
+        <h5>Total:   VND {{cart.get_total|floatformat:3}}</h5>
+      </div>
+    </div>
   </div>
-  </tbody>
-</table>
-
-
-<script>
-  function del_customer(id_customer) {
-    $.ajax({
-      type: "GET",
-      url: "/customer/delete_customer",
-      data: {
-        customer_id: id_customer,
-      },
-      success: function (parsedData) {
-        console.log(parsedData)
-        alert(parsedData["mess"])
-        location.reload();
-      },
-    });
-  }
-</script>
+</div>
 
 {% endblock %}
