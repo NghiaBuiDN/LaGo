@@ -7,12 +7,12 @@
 <div class="container">
     <div class="row">
         {% for product in page_obj %}
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin: 20px 20px;">
             <div class="card" style="width: 18rem; align-items: center;">
-                <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{ product.title }}</h5>
-                  <p class="card-text">{{ product.description }}</p>
+                <a href="{{product.get_absolute_url}}"><img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap"></a>
+                <div class="card-body" style="text-align: center;">
+                  <h4 class="product_text">{{ product.title }}</h4>
+                  <p class="card-text" style="width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product.description }}</p>
                   <a href="{{product.get_absolute_url}}" class="btn btn-primary">{{product.price}}</a>
                 </div>
               </div>

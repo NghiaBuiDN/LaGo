@@ -82,6 +82,39 @@
 
   <br />
 </div>
+<div class="buynow_bt"><a href="{% url 'bathbomb' %}">Bubble Bath Bomb</a></div>
+<div class="product_section">
+  <div id="main_slider" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+        <div class="carousel-item active">
+           <div class="container">
+              <h1 class="product_taital"></h1>
+              <div class="product_section_2">
+                 <div class="row">
+                    
+                   {% for products in my_product %}
+                   <div class="col-lg-4 col-sm-4" style="text-align: center;">
+                       <div class="box_main">
+                          <h4 class="product_text">{{ products.title }}</h4>
+                          <p class="price_text">Price:  <span style="color: #262626;">VND {{products.price|floatformat:3}}</span></p>
+                          <div class="product_img">
+                            <a href="{{ products.get_absolute_url }}" >
+                              <img src="{{ products.image.url }}" href="{{ products.get_absolute_url }}">
+                            </a>
+                          </div>
+                          <div class="buy_bt">
+                              <div class="btn btn-outline-secondary add-btn update-cart"><a href="{{ product.get_absolute_url }}">Chi tiết</a></div>
+                          </div>
+                       </div>
+                   </div>
+                   {% endfor %} 
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
 
 <script>
   // Add button
@@ -111,7 +144,8 @@
     });
   });
 
-    
+
+
 </script>
 
 {% endblock %}

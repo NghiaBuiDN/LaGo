@@ -5,6 +5,7 @@ body {
     font-weight: normal;
     overflow-x: hidden;
     font-family: 'Quicksand', sans-serif;
+    
 }
 
 .navbar-collapse{
@@ -160,7 +161,8 @@ form{
 .product_section {
     width: 100%;
     float: left;
-    padding-bottom: 150px;
+    padding-bottom: 20px;
+    
 }
 
 .product_taital {
@@ -204,7 +206,7 @@ form{
 }
 
 .product_img {
-    width: 85%;
+    width: 100%;
     text-align: center;
     margin: 50px 0px;
     max-height: 390px;
@@ -212,31 +214,7 @@ form{
     margin-right: auto;
 }
 
-.btn_main {
-    width: 100%;
-    display: flex;
-    text-align: center;
-}
 
-.buy_bt {
-    /* float: left; */
-    text-align: center;
-    width: 100%;
-}
-
-.buy_bt a {
-    width: 100%;
-    font-size: 16px;
-    color: #f26522;
-    background-color: transparent;
-    text-align: right;
-    font-weight: bold;
-}
-
-.buy_bt a:hover {
-    background-color: transparent;
-    color: #262626;
-}
 
 .seemore_bt {
     width: 100%;
@@ -398,6 +376,9 @@ input.mail_bt::placeholder {
     .subscribe_bt{
         font-size: 14px;
     }
+    .product_text{
+        font-size: 18px;
+    }
 }
 
 /* copyright section start */
@@ -489,4 +470,86 @@ icon-shape {
 
 .chg-quantity:hover{
 	opacity: .6;
+}
+
+
+.button_quantity {
+    /* float: left; */
+    text-align: center;
+    width: 100%;
+
+}
+.button_quantity:target{
+    display: block;
+}
+.button_quantity .input-group {
+    /* float: left; */
+    display:inherit;
+}
+
+.button_quantity a {
+    width: 100%;
+    font-size: 16px;
+    color: #f26522;
+    background-color: transparent;
+    text-align: right;
+    font-weight: bold;
+}
+
+.button_quantity a:hover {
+    background-color: transparent;
+    color: #262626;
+}
+
+/* Button Buy */
+
+.btn_main {
+    width: 100%;
+    display: inherit;
+    text-align: center;
+}
+
+.buy_bt {
+    /* float: left; */
+    text-align: center;
+    width: 100%;
+    position: relative;
+    transition: color .5s;
+    z-index: 2;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: #000;
+        transform-origin: 0 0;
+        transform: scaleX(0);
+        transition: transform 0.5s cubic-bezier(0.5, 1.6, 0.4, 0.7);
+        z-index: -1;
+      }
+    
+}
+
+.buy_bt .input-group {
+    /* float: left; */
+    display:inherit;
+}
+
+.buy_bt a {
+    width: 100%;
+    font-size: 16px;
+    color: #f26522;
+    background-color: transparent;
+    text-align: right;
+    font-weight: bold;
+}
+
+.buy_bt a:hover {
+    background-color: transparent;
+    color: #262626;
+    &:before {
+        transform: scaleX(1);
+      }
 }

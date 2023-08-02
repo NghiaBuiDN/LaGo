@@ -11,14 +11,16 @@
 
     <br />
 
-    <div class="row mb-4 border product-item">
-      <div class="col-md-3 col-lg-2 order-md-first bg-light">
-        <img
+    <div class="row mb-3 border product-item">
+      <div class="col-md-3 col-lg-2 order-md-first">
+        <a href="{{product.get_absolute_url}}">
+          <img
           class="img-fluid mx-auto d-block"
           width="200px"
           alt="Responsive image"
           src="{{product.image.url}}"
         />
+        </a>
         <!-- Product image -->
       </div>
 
@@ -174,9 +176,7 @@
       url: '{% url "cart-update" %}',
       data: {
         product_id: $(this).data("index"),
-        product_quantity: $(
-          "#select" + theproductid + " option:selected"
-        ).text(),
+        product_quantity: $("#select" + theproductid + " option:selected").text(),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },

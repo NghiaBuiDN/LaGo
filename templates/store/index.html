@@ -48,10 +48,11 @@
            <div class="container">
               <h1 class="product_taital"></h1>
               <div class="product_section_2">
-                 <div class="row">
+                  <div class="row align-items-center">
                     
-                   {% for product in my_product %}
-                   <div class="col-lg-4 col-sm-4">
+                    {% for product in my_product %} {% if product.category.slug == 'bathbomb' %}
+                   
+                   <div class="col-lg-4 col-sm-3 col-xs-3 col-6">
                        <div class="box_main">
                           <h4 class="product_text">{{ product.title }}</h4>
                           <p class="price_text">Price:  <span style="color: #262626;">VND {{product.price|floatformat:3}}</span></p>
@@ -61,24 +62,85 @@
                             </a>
                           </div>
                           <div class="btn_main">
-                            <div class="buy_bt">
-                              <button 
-                                type="button"
-                                id="add-button"
-                                value="{{product.id}}"
-                                data-index="{{product.id}}" 
-                                class="btn btn-outline-secondary add-btn update-cart">Thêm vào giỏ
-                              </button>
-                            </div> 
-                            <div class="buy_bt">
-                              <div class="btn btn-outline-secondary add-btn update-cart"><a href="{{ product.get_absolute_url }}">Chi tiết</a></div>
+                            <div class="buy_bt{{product.id}}" id="button_add">
+                              <div class="buy_bt">
+                                <select id="select"  style="display: none;">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                </select>
+                                <button 
+                                  class="btn btn-outline-secondary add-btn btn-animate update-button"
+                                  type="button"
+                                  id="add-button"
+                                  name="add-button"
+                                  value="{{product.id}}"
+                                  data-index="{{product.id}}" 
+                                  >
+                                  <img src="{% static 'svgs/cart.svg' %}" style="padding-bottom: 5px;">
+                                  Mua hàng
+                                </button>
+                              </div>
                             </div>
                             
+                            
+                            <div class="button_quantity{{product.id}}" style="display: none;">
+                              <div class="button_quantity" id="button_quantity">
+                                <div class="input-group w-auto justify-content-start align-items-center">
+                                  <button
+                                    value="-"
+                                    class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    -
+                                  </button>
+                                  {% for item in cart %} {% if product == item.product %}
+                                  <input
+                                    id="choose{{item.product.id}}"
+                                    type="number"
+                                    step="1"
+                                    max="10"
+                                    value="{{item.qty}}"
+                                    name="quantity"
+                                    class="quantity-field border-0 text-center w-25"
+                                  />
+                                  
+                                  {% endif %} {% endfor %} 
+                                  <button
+                                    value="+"
+                                    class="button-plus border rounded-circle icon-shape icon-sm"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="btn" >
+                                <div class="cart">
+                                  <a
+                                      type="button"
+                                      role="button"
+                                      href="{% url 'cart-summary' %}"
+                                      class="btn btn-outline-primary"
+                                      style="font-size: 1rem;"
+                                    > Giỏ
+                                      <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                                    </a>
+                                </div>
+                              </div>  
+                            </div>
+
+                            <!-- <div class="buy_bt">
+                              <div class="btn btn-outline-secondary add-btn update-cart">
+                                <img src="{% static 'svgs/cart.svg' %}" style="padding-bottom: 5px;">
+                                <a href="{{ product.get_absolute_url }}">Chi tiết</a></div>
+                            </div> -->
                           </div>
                        </div>
                    </div>
-                   {% endfor %}
-                 </div>
+                    {% endif %} {% endfor %}
+                  </div>
               </div>
            </div>
         </div>
@@ -116,30 +178,434 @@
   </div>
 </div>
 
+
+<div class="buynow_bt"><a href="{% url 'salts' %}">Bubbling Salts</a></div>
+
+<div class="product_section">
+  <div id="main_slider" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+        <div class="carousel-item active">
+           <div class="container">
+              <h1 class="product_taital"></h1>
+              <div class="product_section_2">
+                  <div class="row align-items-center">
+                    
+                    {% for product in my_product %} {% if product.category.slug == 'bubbling-bath-salts' %}
+                   
+                   <div class="col-lg-4 col-sm-4 col-6">
+                       <div class="box_main">
+                          <h4 class="product_text">{{ product.title }}</h4>
+                          <p class="price_text">Price:  <span style="color: #262626;">VND {{product.price|floatformat:3}}</span></p>
+                          <div class="product_img">
+                            <a href="{{ product.get_absolute_url }}" >
+                              <img src="{{ product.image.url }}" href="{{ product.get_absolute_url }}">
+                            </a>
+                          </div>
+                          <div class="btn_main">
+                            <div class="buy_bt{{product.id}}" id="button_add">
+                              <div class="buy_bt">
+                                <select id="select"  style="display: none;">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                </select>
+                                <button 
+                                  class="btn btn-outline-secondary add-btn btn-animate update-button"
+                                  type="button"
+                                  id="add-button"
+                                  name="add-button"
+                                  value="{{product.id}}"
+                                  data-index="{{product.id}}" 
+                                  >
+                                  <img src="{% static 'svgs/cart.svg' %}" style="padding-bottom: 5px;">
+                                  Mua hàng
+                                </button>
+                              </div>
+                            </div>
+
+                            <div class="button_quantity{{product.id}}" style="display: none;">
+                              <div class="button_quantity" id="button_quantity">
+                                <div class="input-group w-auto justify-content-start align-items-center">
+                                  <button
+                                    value="-"
+                                    class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    -
+                                  </button>
+                                  {% for item in cart %} {% if product == item.product %}
+                                  <input
+                                    id="choose{{item.product.id}}"
+                                    type="number"
+                                    step="1"
+                                    max="10"
+                                    value="{{item.qty}}"
+                                    name="quantity"
+                                    class="quantity-field border-0 text-center w-25"
+                                  />
+                                  
+                                  {% endif %} {% endfor %} 
+                                  <button
+                                    value="+"
+                                    class="button-plus border rounded-circle icon-shape icon-sm"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="btn" >
+                                <div class="cart">
+                                  <a
+                                      type="button"
+                                      role="button"
+                                      href="{% url 'cart-summary' %}"
+                                      class="btn btn-outline-primary"
+                                      style="font-size: 1rem;"
+                                    > Giỏ
+                                      <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                                    </a>
+                                </div>
+                              </div> 
+                            </div>
+                          </div>
+                       </div>
+                   </div>
+                    {% endif %} {% endfor %}
+                  </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<div class="buynow_bt"><a href="{% url 'soap' %}">Xà Bông</a></div>
+
+<div class="product_section">
+  <div id="main_slider" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+        <div class="carousel-item active">
+           <div class="container">
+              <h1 class="product_taital"></h1>
+              <div class="product_section_2">
+                  <div class="row align-items-center">
+                    
+                    {% for product in my_product %} {% if product.category.slug == 'soap' %}
+                   
+                   <div class="col-lg-4 col-sm-4 col-6">
+                       <div class="box_main">
+                          <h4 class="product_text">{{ product.title }}</h4>
+                          <p class="price_text">Price:  <span style="color: #262626;">VND {{product.price|floatformat:3}}</span></p>
+                          <div class="product_img">
+                            <a href="{{ product.get_absolute_url }}" >
+                              <img src="{{ product.image.url }}" href="{{ product.get_absolute_url }}">
+                            </a>
+                          </div>
+                          <div class="btn_main">
+                            <div class="buy_bt{{product.id}}" id="button_add">
+                              <div class="buy_bt">
+                                <select id="select"  style="display: none;">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                </select>
+                                <button 
+                                  class="btn btn-outline-secondary add-btn btn-animate update-button"
+                                  type="button"
+                                  id="add-button"
+                                  name="add-button"
+                                  value="{{product.id}}"
+                                  data-index="{{product.id}}" 
+                                  >
+                                  <img src="{% static 'svgs/cart.svg' %}" style="padding-bottom: 5px;">
+                                  Mua hàng
+                                </button>
+                              </div>
+                            </div>
+
+                            <div class="button_quantity{{product.id}}" style="display: none;">
+                              <div class="button_quantity" id="button_quantity">
+                                <div class="input-group w-auto justify-content-start align-items-center">
+                                  <button
+                                    value="-"
+                                    class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    -
+                                  </button>
+                                  {% for item in cart %} {% if product == item.product %}
+                                  <input
+                                    id="choose{{item.product.id}}"
+                                    type="number"
+                                    step="1"
+                                    max="10"
+                                    value="{{item.qty}}"
+                                    name="quantity"
+                                    class="quantity-field border-0 text-center w-25"
+                                  />
+                                  
+                                  {% endif %} {% endfor %} 
+                                  <button
+                                    value="+"
+                                    class="button-plus border rounded-circle icon-shape icon-sm"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="btn" >
+                                <div class="cart">
+                                  <a
+                                      type="button"
+                                      role="button"
+                                      href="{% url 'cart-summary' %}"
+                                      class="btn btn-outline-primary"
+                                      style="font-size: 1rem;"
+                                    > Giỏ
+                                      <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                                    </a>
+                                </div>
+                              </div> 
+                            </div>
+                          </div>
+                       </div>
+                   </div>
+                    {% endif %} {% endfor %}
+                  </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<div class="buynow_bt"><a href="{% url 'bathbomb' %}">Sản phẩm khác</a></div>
+
+<div class="product_section">
+  <div id="main_slider" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+        <div class="carousel-item active">
+           <div class="container">
+              <h1 class="product_taital"></h1>
+              <div class="product_section_2">
+                  <div class="row align-items-center">
+                    
+                    {% for product in my_product %} {% if product.category.slug == 'khac' %}
+                   
+                   <div class="col-lg-4 col-sm-4 col-6">
+                       <div class="box_main">
+                          <h4 class="product_text">{{ product.title }}</h4>
+                          <p class="price_text">Price:  <span style="color: #262626;">VND {{product.price|floatformat:3}}</span></p>
+                          <div class="product_img">
+                            <a href="{{ product.get_absolute_url }}" >
+                              <img src="{{ product.image.url }}" href="{{ product.get_absolute_url }}">
+                            </a>
+                          </div>
+                          <div class="btn_main">
+                            <div class="buy_bt{{product.id}}" id="button_add">
+                              <div class="buy_bt">
+                                <select id="select"  style="display: none;">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                </select>
+                                <button 
+                                  class="btn btn-outline-secondary add-btn btn-animate update-button"
+                                  type="button"
+                                  id="add-button"
+                                  name="add-button"
+                                  value="{{product.id}}"
+                                  data-index="{{product.id}}" 
+                                  >
+                                  <img src="{% static 'svgs/cart.svg' %}" style="padding-bottom: 5px;">
+                                  Mua hàng
+                                </button>
+                              </div>
+                            </div>
+
+                            <div class="button_quantity{{product.id}}" style="display: none;">
+                              <div class="button_quantity" id="button_quantity">
+                                <div class="input-group w-auto justify-content-start align-items-center">
+                                  <button
+                                    value="-"
+                                    class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    -
+                                  </button>
+                                  {% for item in cart %} {% if product == item.product %}
+                                  <input
+                                    id="choose{{item.product.id}}"
+                                    type="number"
+                                    step="1"
+                                    max="10"
+                                    value="{{item.qty}}"
+                                    name="quantity"
+                                    class="quantity-field border-0 text-center w-25"
+                                  />
+                                  
+                                  {% endif %} {% endfor %} 
+                                  <button
+                                    value="+"
+                                    class="button-plus border rounded-circle icon-shape icon-sm"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="btn" >
+                                <div class="cart">
+                                  <a
+                                      type="button"
+                                      role="button"
+                                      href="{% url 'cart-summary' %}"
+                                      class="btn btn-outline-primary"
+                                      style="font-size: 1rem;"
+                                    > Giỏ
+                                      <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                                    </a>
+                                </div>
+                              </div> 
+                            </div>
+                          </div>
+                       </div>
+                   </div>
+                    {% endif %} {% endfor %}
+                  </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
 <script>
   // Add button
 
-  $(document).on("click", "#add-button", function (e) {
-    qua = 1;
+  $(document).on("click", ".btn-outline-secondary", function (e) {
+    qua = $("#select option:selected").text();
+    var theproductid = $(this).data("index");
     e.preventDefault();
     $.ajax({
       type: "POST",
       url: '{% url "cart-add" %}',
       data: {
-        product_id: $("#add-button").val(),
-        product_quantity: 1,
+        product_id: $(this).data("index"),
+        product_quantity: $("#select option:selected").text(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: "post",
+      },
+
+      success: function (json) {
+        //console.log(json)
+        // location.reload();
+        document.getElementById("cart-qty").textContent = json.qty;
+      },
+      error: function (xhr, errmsg, err) {},
+    });
+    
+
+    $(".button_quantity" + theproductid).show(300).css({
+      'display' : 'block',
+    });
+    $(".buy_bt" + theproductid).hide(300).css({
+      'display':'none',
+    });
+    
+  });
+
+    
+function incrementValue(e) {
+  e.preventDefault();
+    var fieldName = $(e.target).data("field");
+    var parent = $(e.target).closest("div");
+    var currentVal = parseInt(
+      parent.find("input[name=" + fieldName + "]").val(),
+      10
+    );
+
+    if (!isNaN(currentVal)) {
+      parent.find("input[name=" + fieldName + "]").val(currentVal + 1);
+    } else {
+      parent.find("input[name=" + fieldName + "]").val(0);
+    }
+  }
+
+  function decrementValue(e) {
+    e.preventDefault();
+    var fieldName = $(e.target).data("field");
+    var parent = $(e.target).closest("div");
+    var currentVal = parseInt(
+      parent.find("input[name=" + fieldName + "]").val(),
+      10
+    );
+
+    if (!isNaN(currentVal) && currentVal > 0) {
+      parent.find("input[name=" + fieldName + "]").val(currentVal - 1);
+    } 
+    else {
+      parent.find("input[name=" + fieldName + "]").val(0);
+    }
+  }
+
+  $(".input-group").on("click", ".button-plus", function (e) {
+    incrementValue(e);
+  });
+
+  $(".input-group").on("click", ".button-minus", function (e) {
+    decrementValue(e);
+  });
+
+  $(document).on("click", ".button-plus", function (e) {
+    e.preventDefault();
+    var theproductid = $(this).data("index");
+    $.ajax({
+      type: "POST",
+      url: '{% url "cart-update" %}',
+      data: {
+        product_id: $(this).data("index"),
+        product_quantity: $("#choose" + theproductid).val(),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },
       success: function (json) {
         //console.log(json)
+        // location.reload();
         document.getElementById("cart-qty").textContent = json.qty;
+        document.getElementById("total").textContent = json.total;
       },
       error: function (xhr, errmsg, err) {},
     });
   });
 
-    
+  $(document).on("click", ".button-minus", function (e) {
+    e.preventDefault();
+    var theproductid = $(this).data("index");
+    $.ajax({
+      type: "POST",
+      url: '{% url "cart-update" %}',
+      data: {
+        product_id: $(this).data("index"),
+        product_quantity: $("#choose" + theproductid).val(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: "post",
+      },
+      success: function (json) {
+        //console.log(json)
+        // location.reload();
+        document.getElementById("cart-qty").textContent = json.qty;
+        document.getElementById("total").textContent = json.total;
+      },
+      error: function (xhr, errmsg, err) {},
+    });
+  });
+
 </script>
 
 {% endblock %}

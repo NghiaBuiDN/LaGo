@@ -12,13 +12,19 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request,"store/index.html")
 
+def aboutus(request):
+    return render(request,"store/about.html")
+
 def home(request):
     all_product = Product.objects.all()
     context = {'my_product':all_product}
     return render(request,"store/index.html", context)
+
+
 def product_info(request, product_slug):
     product = get_object_or_404(Product,slug = product_slug)
-    context = {'product':product}
+    all_product = Product.objects.all()
+    context = {'product':product,'my_product':all_product}
     return render(request, "store/product-info.html",context)
 
 
@@ -37,7 +43,27 @@ def search_product(request):
         return render(request,"customer/index.html")
     
 def bathbomb(request):
-    searched = 'bath'
+    searched = 'Bubble Bath Bomb'
+    list_product = Product.objects.filter(brand__contains= searched)
+    paginator = Paginator(list_product,10)  # Show 25 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    data = {'searched':searched,"page_obj": page_obj}
+
+    return render(request,"store/search-product.html",data)
+
+def salts(request):
+    searched = 'salts'
+    list_product = Product.objects.filter(brand__contains= searched)
+    paginator = Paginator(list_product,10)  # Show 25 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    data = {'searched':searched,"page_obj": page_obj}
+
+    return render(request,"store/search-product.html",data)
+
+def soap(request):
+    searched = 'soap'
     list_product = Product.objects.filter(brand__contains= searched)
     paginator = Paginator(list_product,10)  # Show 25 contacts per page.
     page_number = request.GET.get("page")
