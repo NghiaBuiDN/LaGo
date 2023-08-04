@@ -178,6 +178,107 @@
   </div>
 </div>
 
+<div class="buynow_bt"><a href="{% url 'fizzy' %}">Fizzy Bath Bomb</a></div>
+
+<div class="product_section">
+  <div id="main_slider" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+        <div class="carousel-item active">
+           <div class="container">
+              <h1 class="product_taital"></h1>
+              <div class="product_section_2">
+                  <div class="row align-items-center">
+                    
+                    {% for product in my_product %} {% if product.category.slug == 'fizzy' %}
+                   
+                   <div class="col-lg-4 col-sm-4 col-6">
+                       <div class="box_main">
+                          <h4 class="product_text">{{ product.title }}</h4>
+                          <p class="price_text">Price:  <span style="color: #262626;">VND {{product.price|floatformat:3}}</span></p>
+                          <div class="product_img">
+                            <a href="{{ product.get_absolute_url }}" >
+                              <img src="{{ product.image.url }}" href="{{ product.get_absolute_url }}">
+                            </a>
+                          </div>
+                          <div class="btn_main">
+                            <div class="buy_bt{{product.id}}" id="button_add">
+                              <div class="buy_bt">
+                                <select id="select"  style="display: none;">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                </select>
+                                <button 
+                                  class="btn btn-outline-secondary add-btn btn-animate update-button"
+                                  type="button"
+                                  id="add-button"
+                                  name="add-button"
+                                  value="{{product.id}}"
+                                  data-index="{{product.id}}" 
+                                  >
+                                  <img src="{% static 'svgs/cart.svg' %}" style="padding-bottom: 5px;">
+                                  Mua hàng
+                                </button>
+                              </div>
+                            </div>
+
+                            <div class="button_quantity{{product.id}}" style="display: none;">
+                              <div class="button_quantity" id="button_quantity">
+                                <div class="input-group w-auto justify-content-start align-items-center">
+                                  <button
+                                    value="-"
+                                    class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    -
+                                  </button>
+                                  {% for item in cart %} {% if product == item.product %}
+                                  <input
+                                    id="choose{{item.product.id}}"
+                                    type="number"
+                                    step="1"
+                                    max="10"
+                                    value="{{item.qty}}"
+                                    name="quantity"
+                                    class="quantity-field border-0 text-center w-25"
+                                  />
+                                  
+                                  {% endif %} {% endfor %} 
+                                  <button
+                                    value="+"
+                                    class="button-plus border rounded-circle icon-shape icon-sm"
+                                    data-field="quantity"
+                                    data-index="{{product.id}}"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="btn" >
+                                <div class="cart">
+                                  <a
+                                      type="button"
+                                      role="button"
+                                      href="{% url 'cart-summary' %}"
+                                      class="btn btn-outline-primary"
+                                      style="font-size: 1rem;"
+                                    > Giỏ
+                                      <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                                    </a>
+                                </div>
+                              </div> 
+                            </div>
+                          </div>
+                       </div>
+                   </div>
+                    {% endif %} {% endfor %}
+                  </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
 
 <div class="buynow_bt"><a href="{% url 'salts' %}">Bubbling Salts</a></div>
 

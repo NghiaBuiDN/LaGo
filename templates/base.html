@@ -17,6 +17,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="{%static 'css/style.css'%}" />
+    <link rel="stylesheet" href="{%static 'css/font-awesome.min.css'%}" />
     
 
     <!-- JavaScript -->
@@ -45,31 +46,34 @@
   <nav class="navbar sticky-top navbar-expand-lg justify-content-center" style="background-color: #fff1ea;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
+      
     </button>
-
+    <a href="{% url 'store' %}"><img src="{% static 'image/lagohead.png' %}" style="width: 50px; margin-left: 20px;"></a>
     <a class="navbar-brand main-heading text-dark" href="{% url 'store' %}"> 
-      &nbsp; &nbsp; Lá Gỗ Home 
-    </a>
+       &nbsp; &nbsp; Lá Gỗ Home 
+    </a> 
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent" >
+      <ul class="navbar-nav mr-auto" style="font-family: 'Quicksand', sans-serif;">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'store' %}">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'store' %}">Trang chủ <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Sản phẩm
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'bathbomb' %}">Bathbomb</a>
-            <a class="dropdown-item" href="#">Muối tắm</a>
+            <a class="dropdown-item" href="{% url 'bathbomb' %}">Bubble Bathbomb</a>
+            <a class="dropdown-item" href="{% url 'fizzy' %}">Fizzy Bathbomb</a>
+            <a class="dropdown-item" href="{% url 'salts' %}">Bubbling Salts</a>
+            <a class="dropdown-item" href="{% url 'soap' %}">Xà Bông</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Dầu gội</a>
+            <a class="dropdown-item" href="khac">Sản phẩm khác</a>
           </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Contact us
+            Liên hệ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="https://www.facebook.com/lago.bathhome" target="_blank">Facebook</a>
@@ -87,7 +91,7 @@
 
     <form class="d-flex" action="{% url 'search_product' %}" method=POST>
       {% csrf_token %}
-      <input class="form-control me-2" placeholder="Search product" aria-label="Search" type="search" name="searched" >
+      <input class="form-control me-2" placeholder="Tìm kiếm" aria-label="Search" type="search" name="searched" >
       <button class="btn btn-outline-success" type="submit">
         Search
       </button>
@@ -119,6 +123,9 @@
     {% block content %} {% endblock %}
   </body>
 <!-- footer section start -->
+    <section class="call-buton"><a class="cc-calto-action-ripple" href="tel:+84 839 330 199"><i class="fa fa-phone"></i><span class="num"></span>
+    </a>
+    </section>
     <div class="footer_section layout_padding">
       <div class="container">
       <div class="footer_logo"><a href="index.html"><img src="{% static 'image/LogoLago2.png'%}"></a></div>
@@ -133,6 +140,7 @@
               <li><a href="https://shopee.vn/lago_bathstuff" target="_blank">Shopee</a></li>
           </ul>
           <div class="location_main">Help Line Number : <a href="#">+84 839 330 199</a></div>
+          
           <div class="copyright_section">
             <div class="container">
             <p class="copyright_text">© 2022 Copyright by Kaylin</p>

@@ -72,4 +72,14 @@ def soap(request):
 
     return render(request,"store/search-product.html",data)
 
+def fizzy(request):
+    searched = 'fizzy'
+    list_product = Product.objects.filter(brand__contains= searched)
+    paginator = Paginator(list_product,10)  # Show 25 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    data = {'searched':searched,"page_obj": page_obj}
+
+    return render(request,"store/search-product.html",data)
+
     

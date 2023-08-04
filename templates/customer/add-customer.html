@@ -12,7 +12,7 @@
         margin-top: 30px;
       "
     >
-      <a  class="btn btn-outline-dark" href="{% url 'cart-summary' %}">&#x2190; Back to Cart</a>
+      <a  class="btn btn-outline-dark" href="{% url 'cart-summary' %}">&#x2190; Trở về giỏ hàng</a>
       
       <h1 style="font-size: 20px"><br>THÔNG TIN ĐẶT HÀNG</h1>
       </div>
@@ -69,6 +69,7 @@
             name="state"
             placeholder="Nhập tỉnh"
           />
+        
         </div>
     
         <div class="mb-3" style="text-align: left">
@@ -81,7 +82,7 @@
     <div class="col-lg-6">
       <div class="box-element">
         <br>
-        <h3>Order Summary</h3>
+        <h3>Tổng cộng giỏ hàng</h3>
         <hr>
         {% for item in cart %}
         <div class="cart-row">
